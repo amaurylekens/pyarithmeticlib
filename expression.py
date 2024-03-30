@@ -29,6 +29,10 @@ class Operand(ABC):
 
         pass
 
+    def __hash__(self):
+
+        return hash(str(self))
+
 
 class Number(Operand):
 
@@ -215,3 +219,5 @@ if __name__ == '__main__':
     print(expr1, '->', expr1.evaluate())
     print(expr2, '->', expr2.evaluate())
     print(expr3, '->', expr3.evaluate())
+
+    print(hash(expr3))
