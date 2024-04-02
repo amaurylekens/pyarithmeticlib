@@ -189,6 +189,21 @@ class Substraction(BinaryOperation):
 
     """
     Represents a subtraction operation between two operands.
+
+    :Example:
+        >>> substraction = Substraction(Number(1), Number(5))
+        >>> print(substraction)
+        1 - 5
+        >>> substraction = Substraction(
+        ...     Substraction(Number(2), Number(4)), Number(5)
+        ... )
+        >>> print(substraction)
+        2 - 4 - 5
+        >>> substraction = Substraction(
+        ...     Number(2), Substraction(Number(5), Number(3))
+        ... )
+        >>> print(substraction)
+        2 - (5 - 3)
     """
 
     def evaluate(self) -> int:
@@ -221,6 +236,22 @@ class Multiplication(BinaryOperation):
 
     """
     Represents a multiplication operation between two operands.
+
+    :Example:
+        >>> multiplication = Multiplication(Number(1), Number(5))
+        >>> print(multiplication)
+        1 * 5
+        >>> multiplication = Multiplication(
+        ...     Addition(Number(2), Number(4)), Number(5)
+        ... )
+        >>> print(multiplication)
+        (2 + 4) * 5
+        >>> multiplication = Multiplication(
+        ...     Addition(Number(2), Number(4)),
+        ...     Substraction(Number(5), Number(3))
+        ... )
+        >>> print(multiplication)
+        (2 + 4) * (5 - 3)
     """
 
     def evaluate(self) -> int:
@@ -234,7 +265,7 @@ class Multiplication(BinaryOperation):
         :Example:
             >>> multiplication = Multiplication(Number(1), Number(5))
             >>> multiplication.evaluate()
-            -4
+            5
         """
 
         return self._left.evaluate() * self._right.evaluate()
