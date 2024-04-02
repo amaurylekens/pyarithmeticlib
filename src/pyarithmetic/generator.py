@@ -7,6 +7,7 @@ import random
 from expression import (
     BinaryOperation,
     Suboperand,
+    Operand,
     Number
 )
 
@@ -27,15 +28,27 @@ class ExpressionGenerator:
 
         """
         :param max_depth: Maximum depth of nested operations in the expression.
+        :type max_depth: int
         :param min_length: Minimum length of the expression in terms of number
                            of operand.
+        :type max_depth: int
         :param max_length: Maximum length of the expression in terms of number
                            of operands.
+        :type max_length: int
         :param min_value: Minimum numeric value for number in the expression.
+        :type min_value: int
         :param max_value: Maximum numeric value for number in the expression.
+        :type min_value: int
         :param min_n_operands: Minimum number of operands inside an operand.
+        :type min_n_operands: int
         :param max_n_operands: Maximum number of operands inside an operand.
+        :type max_n_operands: int
         :param allowed_operations: Set of allowed binary operation classes.
+        :type allowed_operations: Set[Type[BinaryOperation]]
+
+        :raises ValueError: If any of the minimum values are greater than the
+                            corresponding maximum values, or if the allowed
+                            operations set is empty.
         """
 
         if max_depth < 0:
@@ -74,20 +87,50 @@ class ExpressionGenerator:
         self._max_n_operands = max_n_operands
         self._allowed_operations = allowed_operations
 
-    def create_number(self):
+    def create_number(self) -> Number:
+
+        """
+        Generates a Number instance with a value within the specified range.
+
+        :return: A Number instance.
+        :rtype: Number
+        """
 
         return Number(random.randint(self._min_value, self._max_value))
 
-    def create_operation(self, left, right):
+    def create_operation(
+        self, left: Operand, right: Operand
+    ) -> BinaryOperation:
 
-        if not self._allowed_operations:
-            raise ValueError("No allowed operations specified")
+        """
+        Generates an instance of a randomly chosen allowed binary operation
+        with the given left and right operands.
 
-        op = random.choice(list(self._allowed_operations))
+        :param left: The left operand of the binary operation.
+        :type left: Operand
+        :param right: The right operand of the binary operation.
+        :type right: Operand
 
-        return op(left, right)
+        :return: An instance of a BinaryOperation subclass.
+        :rtype: BinaryOperation
+        """
 
-    def generate_operand(self, depth=0):
+        operation = random.choice(list(self._allowed_operations))
+
+        return operation(left, right)
+
+    def generate_operand(self, depth: int = 0) -> Operand:
+
+        """
+        Recursively generates a complex operand composed of numbers,
+        suboperands, and binary operations up to the specified depth.
+
+        :param depth: The current depth in the operand tree.
+        :type depth: int
+
+        :return: A complex operand possibly containing nested operations.
+        :rtype: Operand
+        """
 
         n_operands = random.randint(self._min_n_operands, self._max_n_operands)
 
@@ -114,7 +157,14 @@ class ExpressionGenerator:
 
         return componed_operand
 
-    def generate(self):
+    def generate(self) -> Operand:
+
+        """
+        Generates an arithmetic expression based on the initialized criteria.
+
+        :return: The root of the generated arithmetic expression tree.
+        :rtype: Operand
+        """
 
         length = random.randint(self._min_length, self._max_length)
         operands = [self.generate_operand() for _ in range(length)]
