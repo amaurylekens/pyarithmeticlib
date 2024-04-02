@@ -43,9 +43,21 @@ class Number(Operand):
     def __init__(self, value: int):
 
         """
-        :param value: The numeric value of this operand.
+        Initializes a Number instance with a given value. Negative numbers are
+        considered invalid and will cause a ValueError to be raised.
+
+        :param value: The numeric value of this operand. Must be non-negative.
         :type value: int
+        :raises ValueError: If a negative value is passed.
+
+        :Example:
+            >>> number = Number(1)  # Create a Number object
+            >>> print(number)
+            1
         """
+
+        if value < 0:
+            raise ValueError("Negative numbers are not allowed.")
 
         self.value = value
 
@@ -56,6 +68,11 @@ class Number(Operand):
 
         :return: The value of the operand.
         :rtype: int
+
+        :Example:
+            >>> number = Number(1)
+            >>> number.evaluate()
+            1
         """
 
         return self.value
@@ -76,6 +93,12 @@ class Suboperand(Operand):
         """
         :param operand: The operand to be encapsulated.
         :type operand: Operand
+
+        :Example:
+            >>> operand = Addition(Number(1), Number(5))
+            >>> suboprand = Suboperand(operand)
+            >>> print(suboprand)
+            (1 + 5)
         """
 
         self._operand = operand
@@ -87,6 +110,11 @@ class Suboperand(Operand):
 
         :return: The value of the operand.
         :rtype: int
+
+        :Example:
+            >>> addition = Addition(Number(1), Number(5))
+            >>> addition.evaluate()
+            6
         """
 
         return self._operand.evaluate()
@@ -143,6 +171,11 @@ class Addition(BinaryOperation):
 
         :return: The value of the operand.
         :rtype: int
+
+        :Example:
+            >>> operand = Addition(Number(1), Number(5))
+            >>> print(operand)
+            (1 + 5)
         """
 
         return self._left.evaluate() + self._right.evaluate()
@@ -165,6 +198,11 @@ class Substraction(BinaryOperation):
 
         :return: The value of the operand.
         :rtype: int
+
+        :Example:
+            >>> substraction = Substraction(Number(1), Number(5))
+            >>> substraction.evaluate()
+            -4
         """
 
         return self._left.evaluate() - self._right.evaluate()
@@ -192,6 +230,11 @@ class Multiplication(BinaryOperation):
 
         :return: The value of the operand.
         :rtype: int
+
+        :Example:
+            >>> multiplication = Multiplication(Number(1), Number(5))
+            >>> multiplication.evaluate()
+            -4
         """
 
         return self._left.evaluate() * self._right.evaluate()
