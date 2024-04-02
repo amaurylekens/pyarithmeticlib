@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from typing import Set, Type
+from typing import Set, Type, Generator
 import random
 
 from expression import (
@@ -175,6 +175,40 @@ class ExpressionGenerator:
 
         return expression
 
+    def yield_expressions(self, n: int) -> Generator[Operand, None, None]:
+        """
+        Yields a specified number of unique arithmetic expressions based on the
+        initialized criteria. Uniqueness is determined by the string
+        representation of the expressions.
+
+        :param n: The number of unique expressions to generate.
+        :type n: int
+
+        :return: A list of unique Operand instances.
+        :rtype: List[Operand]
+
+        :raises RuntimeError: If it fails to generate the required number of
+                              unique expressions within a reasonable number of
+                              attempts.
+        """
+
+        expressions = set()
+        attempts = 0
+        max_attempts = n * 10  # Arbitrary choice to prevent infinite loops
+
+        while len(expressions) < n and attempts < max_attempts:
+            expression = self.generate()
+            if expression not in expressions:
+                expressions.add(expression)
+                yield expression
+            attempts += 1
+
+        if attempts == max_attempts:
+            raise RuntimeError(
+                f"Failed to yields {n} unique expressions after "
+                f"{max_attempts} attempts."
+            )
+
 
 if __name__ == '__main__':
 
@@ -200,7 +234,6 @@ if __name__ == '__main__':
         allowed_operations=allowed_operations,
     )
 
-    expr = generator.generate()
+    for expr in generator.yield_expressions(1000):
 
-    print(expr)
-    print(expr.evaluate())
+        print(expr, "->", expr.evaluate())
