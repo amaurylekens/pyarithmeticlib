@@ -10,7 +10,21 @@ $ pip install pyarithmetic
 
 ## Usage
 
-- TODO
+`pyarithmetic` can be used to generate arithmetic expressions as follows:
+
+```python
+from pyarithmetic.expression import Addition, Multiplication
+from pyarithmetic.generator import ExpressionGenerator
+
+generator = ExpressionGenerator(
+    max_depth=2, min_length=2, max_length=4, min_value=1,
+    max_value=10, min_n_operands=1, max_n_operands=3,
+    allowed_operations={Addition, Multiplication}, seed=42
+)
+
+for expr in generator.yield_expressions(5):
+    print(expr)
+```
 
 ## Contributing
 
