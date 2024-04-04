@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from typing import Set, Type, Generator
-import random
+from typing import Set, Type, Generator, Optional
+from random import Random
 
-from expression import (
+from pyarithmetic.expression import (
     BinaryOperation,
     Suboperand,
     Operand,
@@ -23,7 +23,8 @@ class ExpressionGenerator:
     def __init__(
         self, max_depth: int, min_length: int, max_length: int, min_value: int,
         max_value: int, min_n_operands: int, max_n_operands: int,
-        allowed_operations: Set[Type[BinaryOperation]]
+        allowed_operations: Set[Type[BinaryOperation]],
+        seed: Optional[int] = None
     ):
 
         """
@@ -67,6 +68,9 @@ class ExpressionGenerator:
                 "max_value must be greater than or equal to min_value."
             )
 
+        if min_n_operands < 1:
+            raise ValueError("min_n_operands must be at least 1.")
+
         if max_n_operands < min_n_operands:
             raise ValueError(
                 "max_n_operands must be greater than or equal to "
@@ -87,7 +91,42 @@ class ExpressionGenerator:
         self._max_n_operands = max_n_operands
         self._allowed_operations = allowed_operations
 
-    def create_number(self) -> Number:
+        self._seed = seed
+
+        if seed:
+            self._random = Random(seed)
+        else:
+            self._random = Random()
+
+    def _set_seed(self):
+
+        self._number_seed = self._seed
+        self._operation_seed = self._seed
+        self._operand_type_seed = self._seed
+        self._n_operands_seed = self._seed
+        self._length_seed = self._seed
+
+    def _random_number(self) -> int:
+
+        return self._random.randint(self._min_value, self._max_value)
+
+    def _random_operation(self) -> Type[BinaryOperation]:
+
+        return self._random.choice(list(self._allowed_operations))
+
+    def _random_operand_type(self) -> str:
+
+        return self._random.choice(['number', 'suboperand'])
+
+    def _random_n_operands(self) -> int:
+
+        return self._random.randint(self._min_n_operands, self._max_n_operands)
+
+    def _random_length(self) -> int:
+
+        return self._random.randint(self._min_length, self._max_length)
+
+    def _create_number(self) -> Number:
 
         """
         Generates a Number instance with a value within the specified range.
@@ -96,9 +135,9 @@ class ExpressionGenerator:
         :rtype: Number
         """
 
-        return Number(random.randint(self._min_value, self._max_value))
+        return Number(self._random_number())
 
-    def create_operation(
+    def _create_operation(
         self, left: Operand, right: Operand
     ) -> BinaryOperation:
 
@@ -115,11 +154,11 @@ class ExpressionGenerator:
         :rtype: BinaryOperation
         """
 
-        operation = random.choice(list(self._allowed_operations))
+        operation = self._random_operation()
 
         return operation(left, right)
 
-    def generate_operand(self, depth: int = 0) -> Operand:
+    def _generate_operand(self, depth: int = 0) -> Operand:
 
         """
         Recursively generates a complex operand composed of numbers,
@@ -132,23 +171,22 @@ class ExpressionGenerator:
         :rtype: Operand
         """
 
-        n_operands = random.randint(self._min_n_operands, self._max_n_operands)
+        n_operands = self._random_n_operands()
 
         operands = list()
         for _ in range(n_operands):
 
-            operand_type = random.choice(
-                ['number', 'suboperand']
-            )
+            operand_type = self._random_operand_type()
+
             if operand_type == 'number' or depth == self._max_depth:
-                operands.append(self.create_number())
+                operands.append(self._create_number())
 
             elif operand_type == 'suboperand':
-                operands.append(Suboperand(self.generate_operand(depth + 1)))
+                operands.append(Suboperand(self._generate_operand(depth + 1)))
 
         componed_operand = operands[0]
         for operand in operands[1:]:
-            componed_operand = self.create_operation(
+            componed_operand = self._create_operation(
                 componed_operand, operand
             )
 
@@ -166,12 +204,12 @@ class ExpressionGenerator:
         :rtype: Operand
         """
 
-        length = random.randint(self._min_length, self._max_length)
-        operands = [self.generate_operand() for _ in range(length)]
+        length = self._random_length()
+        operands = [self._generate_operand() for _ in range(length)]
 
         expression = operands[0]
         for next_expr in operands[1:]:
-            expression = self.create_operation(expression, next_expr)
+            expression = self._create_operation(expression, next_expr)
 
         return expression
 
@@ -196,12 +234,17 @@ class ExpressionGenerator:
         attempts = 0
         max_attempts = n * 10  # Arbitrary choice to prevent infinite loops
 
+        original_seed = self._seed
+
         while len(expressions) < n and attempts < max_attempts:
             expression = self.generate()
+            self._seed += 100
             if expression not in expressions:
                 expressions.add(expression)
                 yield expression
             attempts += 1
+
+        self._seed = original_seed
 
         if attempts == max_attempts:
             raise RuntimeError(
@@ -212,28 +255,30 @@ class ExpressionGenerator:
 
 if __name__ == '__main__':
 
-    from expression import Addition
+    from expression import Addition, Substraction, Multiplication
 
-    max_depth = 0
-    min_length = 1
-    max_length = 3
+    max_depth = 1
+    min_length = 3
+    max_length = 6
     min_value = 0
-    max_value = 100
+    max_value = 10
     min_n_operands = 1
-    max_n_operands = 1
-    allowed_operations = {Addition}
+    max_n_operands = 2
+    allowed_operations = {Addition, Substraction, Multiplication}
 
-    generator = ExpressionGenerator(
-        max_depth=max_depth,
-        min_length=min_length,
-        max_length=max_length,
-        min_value=min_value,
-        max_value=max_value,
-        min_n_operands=min_n_operands,
-        max_n_operands=max_n_operands,
-        allowed_operations=allowed_operations,
-    )
+    for i in range(100):
 
-    for expr in generator.yield_expressions(1000):
+        generator = ExpressionGenerator(
+            max_depth=max_depth,
+            min_length=min_length,
+            max_length=max_length,
+            min_value=min_value,
+            max_value=max_value,
+            min_n_operands=min_n_operands,
+            max_n_operands=max_n_operands,
+            allowed_operations=allowed_operations,
 
-        print(expr, "->", expr.evaluate())
+        )
+
+        print(generator.generate())
+
