@@ -1,10 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
 
+from functools import total_ordering
 from abc import ABC, abstractmethod
 
 
+@total_ordering
 class Operand(ABC):
 
     """
@@ -32,6 +35,26 @@ class Operand(ABC):
     def __hash__(self):
 
         return hash(str(self))
+
+    def __eq__(self, other: Operand):
+
+        if not isinstance(other, Operand):
+            raise ValueError(f"Unable to compare Operand with {type(other)}")
+
+        if self.evaluate() == other.evaluate():
+            return True
+        else:
+            return False
+
+    def __gt__(self, other: Operand):
+
+        if not isinstance(other, Operand):
+            raise ValueError(f"Unable to compare Operand with {type(other)}")
+
+        if self.evaluate() > other.evaluate():
+            return True
+        else:
+            return False
 
 
 class Number(Operand):
