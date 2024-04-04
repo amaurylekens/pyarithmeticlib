@@ -6,7 +6,9 @@ from random import Random
 
 from pyarithmetic.expression import (
     BinaryOperation,
+    Multiplication,
     Suboperand,
+    Addition,
     Operand,
     Number
 )
@@ -270,34 +272,3 @@ class ExpressionGenerator:
                 f"Failed to yields {n} unique expressions after "
                 f"{max_attempts} attempts."
             )
-
-
-if __name__ == '__main__':
-
-    from expression import Addition, Substraction, Multiplication
-
-    max_depth = 1
-    min_length = 3
-    max_length = 6
-    min_value = 0
-    max_value = 10
-    min_n_operands = 1
-    max_n_operands = 2
-    allowed_operations = {Addition, Substraction, Multiplication}
-
-    for i in range(100):
-
-        generator = ExpressionGenerator(
-            max_depth=max_depth,
-            min_length=min_length,
-            max_length=max_length,
-            min_value=min_value,
-            max_value=max_value,
-            min_n_operands=min_n_operands,
-            max_n_operands=max_n_operands,
-            allowed_operations=allowed_operations,
-
-        )
-
-        print(generator.generate())
-

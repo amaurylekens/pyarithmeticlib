@@ -303,18 +303,3 @@ class Multiplication(BinaryOperation):
             else f"{str(self._right)}"
 
         return f"{left_str} * {right_str}"
-
-
-if __name__ == '__main__':
-
-    expr1 = Suboperand(Substraction(Number(3), Addition(Number(1), Number(2))))
-    expr2 = Multiplication(Substraction(Number(5), expr1), Number(3))
-    expr3 = Multiplication(
-        Addition(Multiplication(Number(5), Number(3)), Number(4)), expr2
-    )
-
-    print(expr1, '->', expr1.evaluate())
-    print(expr2, '->', expr2.evaluate())
-    print(expr3, '->', expr3.evaluate())
-
-    print(hash(expr3))
