@@ -258,17 +258,12 @@ class ExpressionGenerator:
         attempts = 0
         max_attempts = n * 10  # Arbitrary choice to prevent infinite loops
 
-        original_seed = self._seed
-
         while len(expressions) < n and attempts < max_attempts:
             expression = self.generate()
-            self._seed += 100
             if expression not in expressions:
                 expressions.add(expression)
                 yield expression
             attempts += 1
-
-        self._seed = original_seed
 
         if attempts == max_attempts:
             raise RuntimeError(
