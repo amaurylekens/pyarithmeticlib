@@ -104,14 +104,6 @@ class ExpressionGenerator:
         else:
             self._random = Random()
 
-    def _set_seed(self):
-
-        self._number_seed = self._seed
-        self._operation_seed = self._seed
-        self._operand_type_seed = self._seed
-        self._n_operands_seed = self._seed
-        self._length_seed = self._seed
-
     def _random_number(self) -> int:
 
         return self._random.randint(self._min_value, self._max_value)

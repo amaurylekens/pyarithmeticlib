@@ -210,8 +210,6 @@ def test_expression_generate(
         seed=seed
     )
 
-    generator._set_seed()
-
     actual = [str(expr) for expr in generator.yield_expressions(n)]
     expected = [str(expr) for expr in expected]
 
