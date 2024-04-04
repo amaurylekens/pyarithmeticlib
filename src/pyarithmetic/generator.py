@@ -46,6 +46,12 @@ class ExpressionGenerator:
         :type max_n_operands: int
         :param allowed_operations: Set of allowed binary operation classes.
         :type allowed_operations: Set[Type[BinaryOperation]]
+        :param seed: Optional seed for random number generator to ensure
+                     reproducible results. If provided, the generator will
+                     produce the same sequence of expressions for the same seed
+                     value. If not provided, the sequence of expressions will
+                     be random and different each time.
+        :type seed: Optional[int]
 
         :raises ValueError: If any of the minimum values are greater than the
                             corresponding maximum values, or if the allowed
@@ -202,6 +208,16 @@ class ExpressionGenerator:
 
         :return: The root of the generated arithmetic expression tree.
         :rtype: Operand
+
+        :Example:
+            >>> generator = ExpressionGenerator(
+            ...     max_depth=2, min_length=2, max_length=4, min_value=1,
+            ...     max_value=10, min_n_operands=1, max_n_operands=3,
+            ...     allowed_operations={Addition, Multiplication}, seed=42
+            ... )
+            >>> expr = generator.generate()
+            >>> print(expr)
+            3 + 4 + (2 * 2)
         """
 
         length = self._random_length()
@@ -214,6 +230,7 @@ class ExpressionGenerator:
         return expression
 
     def yield_expressions(self, n: int) -> Generator[Operand, None, None]:
+
         """
         Yields a specified number of unique arithmetic expressions based on the
         initialized criteria. Uniqueness is determined by the string
@@ -228,6 +245,21 @@ class ExpressionGenerator:
         :raises RuntimeError: If it fails to generate the required number of
                               unique expressions within a reasonable number of
                               attempts.
+
+        :Example:
+            >>> generator = ExpressionGenerator(
+            ...     max_depth=2, min_length=2, max_length=4, min_value=1,
+            ...     max_value=10, min_n_operands=1, max_n_operands=3,
+            ...     allowed_operations={Addition, Multiplication}, seed=42
+            ... )
+            >>> unique_expressions = list(generator.yield_expressions(5))
+            >>> for expr in unique_expressions:
+            ...     print(expr)
+            3 + 2
+            (1 * 2) + 3
+            4 * (2 + 1)
+            2 + (3 * 1)
+            (4 + 1) * 2
         """
 
         expressions = set()
