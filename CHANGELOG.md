@@ -4,4 +4,4 @@
 
 ## v0.1.0 (02/04/2024)
 
-- First release of `pyarithmetic`!
+- First release of `pyarithmeticlib`!

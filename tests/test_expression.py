@@ -3,7 +3,7 @@
 
 import pytest
 
-from pyarithmetic.expression import (
+from pyarithmeticlib.expression import (
     Multiplication,
     Substraction,
     Suboperand,

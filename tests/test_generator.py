@@ -3,8 +3,8 @@
 
 import pytest
 
-from pyarithmetic.generator import ExpressionGenerator
-from pyarithmetic.expression import (
+from pyarithmeticlib.generator import ExpressionGenerator
+from pyarithmeticlib.expression import (
     Multiplication,
     Substraction,
     Suboperand,

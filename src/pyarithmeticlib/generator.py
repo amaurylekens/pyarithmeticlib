@@ -4,7 +4,7 @@
 from typing import Set, Type, Generator, Optional
 from random import Random
 
-from pyarithmetic.expression import (
+from pyarithmeticlib.expression import (
     BinaryOperation,
     Multiplication,
     Suboperand,

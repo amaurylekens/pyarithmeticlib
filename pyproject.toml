@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pyarithmetic"
+name = "pyarithmeticlib"
 version = "0.1.0"
 description = "A package to generate arithmetic expression"
 authors = ["amaurylekens"]

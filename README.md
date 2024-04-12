@@ -1,20 +1,20 @@
-# pyarithmetic
+# pyarithmeticlib
 
 A package to generate arithmetic expression
 
 ## Installation
 
 ```bash
-$ pip install pyarithmetic
+$ pip install pyarithmeticlib
 ```
 
 ## Usage
 
-`pyarithmetic` can be used to generate arithmetic expressions as follows:
+`pyarithmeticlib` can be used to generate arithmetic expressions as follows:
 
 ```python
-from pyarithmetic.expression import Addition, Multiplication
-from pyarithmetic.generator import ExpressionGenerator
+from pyarithmeticlib.expression import Addition, Multiplication
+from pyarithmeticlib.generator import ExpressionGenerator
 
 generator = ExpressionGenerator(
     max_depth=2, min_length=2, max_length=4, min_value=1,
@@ -32,8 +32,8 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`pyarithmetic` was created by amaurylekens. It is licensed under the terms of the MIT license.
+`pyarithmeticlib` was created by amaurylekens. It is licensed under the terms of the MIT license.
 
 ## Credits
 
-`pyarithmetic` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+`pyarithmeticlib` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
