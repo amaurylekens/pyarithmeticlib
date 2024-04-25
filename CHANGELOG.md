@@ -2,6 +2,13 @@
 
 
 
+## v0.1.4 (2024-04-25)
+
+### Fix
+
+* fix: build release ([`f416cb5`](https://github.com/amaurylekens/pyarithmeticlib/commit/f416cb5cc7d3a9f8fa12f484ca9a55d3ce4849ed))
+
+
 ## v0.1.3 (2024-04-25)
 
 ### Fix
