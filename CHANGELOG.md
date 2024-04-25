@@ -2,11 +2,45 @@
 
 
 
+## v0.1.6 (2024-04-25)
+
+### Build
+
+* build: add PSR as dev dependency ([`692520f`](https://github.com/amaurylekens/pyarithmetic/commit/692520f6b3d519fdd2db59303daa8e2824dee1b8))
+
+### Fix
+
+* fix: fix version number ([`b63d9ea`](https://github.com/amaurylekens/pyarithmetic/commit/b63d9eac69a4abf5445f6fe027f260ad3525c93e))
+
+
+## v0.1.5 (2024-04-25)
+
+### Fix
+
+* fix: update ci-cd.yml ([`f7b0822`](https://github.com/amaurylekens/pyarithmetic/commit/f7b0822fa50f7cf9e90ff33e2081a7651f93c23d))
+
+
 ## v0.1.2 (2024-04-25)
 
 ### Build
 
 * build: add PSR as dev dependency ([`1d29a98`](https://github.com/amaurylekens/pyarithmetic/commit/1d29a9892276bf324d2939b1ecbd64a441b3f8e4))
+
+### Fix
+
+* fix: update ci-cd.yml ([`149e10b`](https://github.com/amaurylekens/pyarithmetic/commit/149e10b1341f724a55585e5d68dd2781ecddb904))
+
+
+## v0.1.4 (2024-04-25)
+
+### Fix
+
+* fix: build release ([`f416cb5`](https://github.com/amaurylekens/pyarithmetic/commit/f416cb5cc7d3a9f8fa12f484ca9a55d3ce4849ed))
+
+
+## v0.1.3 (2024-04-25)
+
+### Build
 
 * build: update ci-cd.yml ([`8b98640`](https://github.com/amaurylekens/pyarithmetic/commit/8b986400ded83e6a73af9a54000473a25dfb71b5))
 
@@ -25,10 +59,6 @@
 * docs: update README.md ([`453936a`](https://github.com/amaurylekens/pyarithmetic/commit/453936a2e5aed8a92a0079759837e42ebd0c3294))
 
 ### Fix
-
-* fix: update ci-cd.yml ([`149e10b`](https://github.com/amaurylekens/pyarithmetic/commit/149e10b1341f724a55585e5d68dd2781ecddb904))
-
-* fix: build release ([`f416cb5`](https://github.com/amaurylekens/pyarithmetic/commit/f416cb5cc7d3a9f8fa12f484ca9a55d3ce4849ed))
 
 * fix: change pycounts to pyarithmeticlib ([`871987b`](https://github.com/amaurylekens/pyarithmetic/commit/871987bf67fb77f7a7a29b49cd78510ab0a49374))
 
