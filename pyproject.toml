@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyarithmeticlib"
-version = "0.1.0"
+version = "0.1.6"
 description = "A package to generate arithmetic expression"
 authors = ["amaurylekens"]
 license = "MIT"
