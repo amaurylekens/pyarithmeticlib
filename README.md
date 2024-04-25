@@ -1,4 +1,4 @@
-(https://github.com/amaurylekens/pyarithmeticlib/actions/workflows/ci-cd.yml/badge.svg)
+![workflow badge](https://github.com/amaurylekens/pyarithmeticlib/actions/workflows/ci-cd.yml/badge.svg)
 
 # pyarithmeticlib
 
