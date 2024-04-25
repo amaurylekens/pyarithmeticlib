@@ -1,4 +1,5 @@
 ![workflow badge](https://github.com/amaurylekens/pyarithmeticlib/actions/workflows/ci-cd.yml/badge.svg)
+[![codecov](https://codecov.io/gh/amaurylekens/pyarithmeticlib/graph/badge.svg?token=HLTD893DQM)](https://codecov.io/gh/amaurylekens/pyarithmeticlib)
 
 # pyarithmeticlib
 
