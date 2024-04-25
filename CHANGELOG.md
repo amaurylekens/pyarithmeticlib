@@ -2,6 +2,19 @@
 
 
 
+## v0.1.9 (2024-04-25)
+
+### Fix
+
+* fix: remove release ([`64cdd95`](https://github.com/amaurylekens/pyarithmetic/commit/64cdd955b48a82e983466b282f4be79a2246725b))
+
+* fix: fix release ([`1a5c965`](https://github.com/amaurylekens/pyarithmetic/commit/1a5c965ed01b1361ef74d4d28e724346c28feb0d))
+
+* fix: add release ([`fff8569`](https://github.com/amaurylekens/pyarithmetic/commit/fff8569ade2f48ca6ae870068093e54939bf5872))
+
+* fix: remove cd ([`55b3cfb`](https://github.com/amaurylekens/pyarithmetic/commit/55b3cfbe705be4bbd49488fef9355b12bf99fc5a))
+
+
 ## v0.1.8 (2024-04-25)
 
 ### Fix
