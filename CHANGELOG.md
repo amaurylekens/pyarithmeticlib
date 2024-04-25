@@ -2,6 +2,13 @@
 
 
 
+## v0.1.7 (2024-04-25)
+
+### Fix
+
+* fix: fix version number ([`dfcce15`](https://github.com/amaurylekens/pyarithmetic/commit/dfcce15feebb5d6a6ef683b934a627ad4ae23529))
+
+
 ## v0.1.6 (2024-04-25)
 
 ### Build
