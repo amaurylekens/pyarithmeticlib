@@ -2,6 +2,13 @@
 
 
 
+## v0.1.3 (2024-04-25)
+
+### Fix
+
+* fix: change pycounts to pyarithmeticlib ([`871987b`](https://github.com/amaurylekens/pyarithmeticlib/commit/871987bf67fb77f7a7a29b49cd78510ab0a49374))
+
+
 ## v0.1.2 (2024-04-25)
 
 ### Build
