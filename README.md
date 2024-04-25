@@ -1,3 +1,5 @@
+(https://github.com/amaurylekens/pyarithmeticlib/actions/workflows/ci-cd/badge.svg)
+
 # pyarithmeticlib
 
 A package to generate arithmetic expression
