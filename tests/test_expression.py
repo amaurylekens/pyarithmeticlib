@@ -58,10 +58,10 @@ test_values = [
 
 
 @pytest.mark.parametrize('number, expected', test_values)
-def test_number_evaluate(number, expected):
+def test_number_str(number, expected):
 
-    actual = number.evaluate()
-    assert str(actual) == expected
+    actual = str(number)
+    assert actual == expected
 
 # test Addition
 
