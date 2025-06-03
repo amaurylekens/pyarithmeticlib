@@ -5,6 +5,8 @@ import pytest
 
 from pyarithmeticlib.expression import (
     Multiplication,
+    Division,
+    Exponentiation,
     Substraction,
     Suboperand,
     Addition,
@@ -170,6 +172,78 @@ test_values = [
 def test_multiplication_str(left, right, expected):
 
     actual = Multiplication(left, right)
+
+    assert str(actual) == expected
+
+
+# test Division
+
+# test Division.evaluate
+test_values = [
+    (Number(4), Number(2), 2),
+    (Number(5), Number(2), 2),
+    (Addition(Number(4), Number(2)), Number(2), 3),
+    (Number(8), Addition(Number(2), Number(2)), 2)
+]
+
+
+@pytest.mark.parametrize('left, right, expected', test_values)
+def test_division_evaluate(left, right, expected):
+
+    division = Division(left, right)
+    actual = division.evaluate()
+
+    assert actual == expected
+
+
+# test Division.__str__
+test_values = [
+    (Number(4), Number(2), "4 / 2"),
+    (Addition(Number(1), Number(2)), Number(2), "(1 + 2) / 2"),
+    (Number(5), Substraction(Number(3), Number(1)), "5 / (3 - 1)")
+]
+
+
+@pytest.mark.parametrize('left, right, expected', test_values)
+def test_division_str(left, right, expected):
+
+    actual = Division(left, right)
+
+    assert str(actual) == expected
+
+
+# test Exponentiation
+
+# test Exponentiation.evaluate
+test_values = [
+    (Number(2), Number(3), 8),
+    (Number(2), Number(0), 1),
+    (Addition(Number(2), Number(1)), Number(2), 9),
+    (Number(2), Addition(Number(1), Number(1)), 4)
+]
+
+
+@pytest.mark.parametrize('left, right, expected', test_values)
+def test_exponentiation_evaluate(left, right, expected):
+
+    expo = Exponentiation(left, right)
+    actual = expo.evaluate()
+
+    assert actual == expected
+
+
+# test Exponentiation.__str__
+test_values = [
+    (Number(2), Number(3), "2 ** 3"),
+    (Addition(Number(1), Number(2)), Number(2), "(1 + 2) ** 2"),
+    (Number(2), Substraction(Number(3), Number(1)), "2 ** (3 - 1)")
+]
+
+
+@pytest.mark.parametrize('left, right, expected', test_values)
+def test_exponentiation_str(left, right, expected):
+
+    actual = Exponentiation(left, right)
 
     assert str(actual) == expected
 

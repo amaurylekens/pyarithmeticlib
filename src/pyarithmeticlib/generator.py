@@ -106,6 +106,15 @@ class ExpressionGenerator:
         else:
             self._random = Random()
 
+    def _set_seed(self, seed: Optional[int] = None) -> None:
+        """Reset the random seed used by the generator."""
+
+        if seed is not None:
+            self._seed = seed
+
+        if self._seed is not None:
+            self._random.seed(self._seed)
+
     def _random_number(self) -> int:
 
         return self._random.randint(self._min_value, self._max_value)
