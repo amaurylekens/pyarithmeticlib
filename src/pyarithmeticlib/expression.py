@@ -303,3 +303,42 @@ class Multiplication(BinaryOperation):
             else f"{str(self._right)}"
 
         return f"{left_str} * {right_str}"
+
+
+class Division(BinaryOperation):
+
+    """Represents a division operation between two operands."""
+
+    def evaluate(self) -> int:
+
+        """Evaluates and returns the value of the operand."""
+
+        right_value = self._right.evaluate()
+        if right_value == 0:
+            raise ZeroDivisionError("division by zero")
+        return self._left.evaluate() // right_value
+
+    def __str__(self):
+
+        left_str = f"({str(self._left)})" if isinstance(self._left, BinaryOperation) else f"{str(self._left)}"
+        right_str = f"({str(self._right)})" if isinstance(self._right, BinaryOperation) else f"{str(self._right)}"
+
+        return f"{left_str} / {right_str}"
+
+
+class Exponentiation(BinaryOperation):
+
+    """Represents an exponentiation operation between two operands."""
+
+    def evaluate(self) -> int:
+
+        """Evaluates and returns the value of the operand."""
+
+        return self._left.evaluate() ** self._right.evaluate()
+
+    def __str__(self):
+
+        left_str = f"({str(self._left)})" if isinstance(self._left, BinaryOperation) else f"{str(self._left)}"
+        right_str = f"({str(self._right)})" if isinstance(self._right, BinaryOperation) else f"{str(self._right)}"
+
+        return f"{left_str} ** {right_str}"
