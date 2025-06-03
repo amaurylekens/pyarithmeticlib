@@ -119,8 +119,8 @@ class Suboperand(Operand):
 
         :Example:
             >>> operand = Addition(Number(1), Number(5))
-            >>> suboprand = Suboperand(operand)
-            >>> print(suboprand)
+            >>> suboperand = Suboperand(operand)
+            >>> print(suboperand)
             (1 + 5)
         """
 
