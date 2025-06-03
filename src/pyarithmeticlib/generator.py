@@ -34,14 +34,14 @@ class ExpressionGenerator:
         :type max_depth: int
         :param min_length: Minimum length of the expression in terms of number
                            of operand.
-        :type max_depth: int
+        :type min_length: int
         :param max_length: Maximum length of the expression in terms of number
                            of operands.
         :type max_length: int
         :param min_value: Minimum numeric value for number in the expression.
         :type min_value: int
         :param max_value: Maximum numeric value for number in the expression.
-        :type min_value: int
+        :type max_value: int
         :param min_n_operands: Minimum number of operands inside an operand.
         :type min_n_operands: int
         :param max_n_operands: Maximum number of operands inside an operand.
